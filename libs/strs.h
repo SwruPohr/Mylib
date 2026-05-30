@@ -143,7 +143,7 @@ static inline int get_int_until_delim(int *n, char delim) {
     return (c == EOF) ? 1 : 2;
 }
 
-static inline int get_whitespace_as_int(int *n) {
+static inline int get_int_until_whitespace(int *n) {
     int c;
     int sign = 1;
     int num = 0;
