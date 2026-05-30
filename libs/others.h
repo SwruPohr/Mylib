@@ -7,7 +7,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include "types.h"
+#include "../types.h"
 
 static inline uint32_t nonzero_strlen(const char *str) {
 	uint32_t len = 0;
