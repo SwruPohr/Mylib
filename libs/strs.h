@@ -172,7 +172,7 @@ static inline int get_int_until_whitespace(int *n) {
     return (c == EOF) ? 1 : 2;
 }
 
-static inline int ex() {
+static inline int example() {
     int t; // test cases
     int n, k; // box count
     int a_prev, a_curr;
