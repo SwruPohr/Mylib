@@ -2,23 +2,22 @@
 // Created by Webcloud on 2026-05-06.
 //
 
-#ifndef DEQUE_H
-#define DEQUE_H
+#ifndef QUEUE_H
+#define QUEUE_H
 
 #import <stdint.h>
-
 
 typedef struct {
     int *data;
     size_t capacity;
     size_t first; /* 0 to capacity */
     size_t last; /* 0 to capacity - 1 */
-} Deque;
+} Queue;
 
-#define dq_size(dq) (dq.first == dq.capacity ? 0 : dq.first <= dq.last ? dq.last - dq.first + 1 : dq.capacity - dq.first + dq.last + 1)
+#define q_size(dq) (dq.first == dq.capacity ? 0 : dq.first <= dq.last ? dq.last - dq.first + 1 : dq.capacity - dq.first + dq.last + 1)
 
-#define dq_is_empty(dq) (dq.first == dq.capacity)
-#define dq_is_full(dq) ((dq.first == 0 && dq.last == dq.capacity - 1) || dq.first == dq.last + 1)
+#define q_is_empty(dq) (dq.first == dq.capacity)
+#define q_is_full(dq) ((dq.first == 0 && dq.last == dq.capacity - 1) || dq.first == dq.last + 1)
 
 
 // APPRENSION
@@ -36,28 +35,7 @@ typedef struct {
 
 #define dq_push_back(dq, v) dq_append(dq, v)
 
-// assume not full
-#define dq_enlarge_front(dq) \
-    if (dq.first == dq.capacity) {dq.first = dq.last;} \
-    else {dq.first = (dq.first == 0 ? dq.capacity - 1 : dq.first - 1);}
 
-#define dq_prepend(dq, v) {\
-    dq_enlarge_front(dq); \
-    dq.data[dq.first] = (v); \
-    }
-
-#define dq_push_front(dq, v) dq_prepend(dq, v)
-
-
-// assume not empty
-#define dq_contract_back(dq) \
-    if (dq.first == dq.last) {dq.first == dq.capacity;} \
-    else { dq.last = (dq.last == 0 ? dq.capacity : dq.last - 1);}
-
-#define dq_pop_back(dq) {\
-    dq.data[dq.last] = 0; \
-    dq_contract_back(dq); \
-    }
 
 #define dq_contract_front(dq) \
     if (dq.first == dq.last) {dq.first == dq.capacity;} \
@@ -80,11 +58,7 @@ typedef struct {
     }
 
 #define dq_get_first(dq) (dq[dq.first])
-#define dq_get_last(dq) (dq[dq.last])
 
-#define dq_set_first(dq, var) { \
-    dq.data[dq.first] = (var) \
-    }
 
 #define dq_set_last(dq, var) { \
     dq.data[dq.last] = (var) \
@@ -217,4 +191,4 @@ typedef struct {
     dq_##fn(dq, ##__VA_ARGS__); \
     }
 
-#endif //DEQUE_H
+#endif // QUEUE_H
