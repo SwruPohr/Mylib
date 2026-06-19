@@ -9,7 +9,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static inline int isWhitespace(char c) { return ((c) == ' ' || ((c) >= '\t' && (c) <= '\r')); }
+static inline int isWhitespace(char c) {
+    return (c == ' ' || (c >= '\t' && c <= '\r'));
+}
+
+static inline int isDigit(char c) {
+    return (c >= '0' && c <= '9');
+}
+
+static inline int isAlpha(char c) {
+    return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+}
+
 
 // buffer len not respected
 static inline int get_until_whitespace (char **st, size_t *len, size_t *cap) {
