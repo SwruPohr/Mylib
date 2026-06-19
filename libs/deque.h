@@ -51,8 +51,8 @@ typedef struct {
 
 // assume not empty
 #define dq_contract_back(dq) \
-    if (dq.first == dq.last) {dq.first == dq.capacity;} \
-    else { dq.last = (dq.last == 0 ? dq.capacity : dq.last - 1);}
+    if (dq.first == dq.last) {return 1;} \
+    else { dq.last = (dq.last == 0 ? dq.capacity - 1 : dq.last - 1);}
 
 #define dq_pop_back(dq) {\
     dq.data[dq.last] = 0; \
@@ -60,8 +60,8 @@ typedef struct {
     }
 
 #define dq_contract_front(dq) \
-    if (dq.first == dq.last) {dq.first == dq.capacity;} \
-    else {dq.last = (dq.last == 0 ? dq.capacity : dq.last - 1);}
+    if (dq.first == dq.last) {return 1;} \
+    else {dq.first = (dq.first == dq.capacity - 1 ? 0 : dq.first - 1);}
 
 #define dq_pop_front(dq) { \
     dq.data[dq.first]= 0; \
@@ -79,8 +79,8 @@ typedef struct {
     dq.data[(dq.first + i) % dq.capacity] = (var); \
     }
 
-#define dq_get_first(dq) (dq[dq.first])
-#define dq_get_last(dq) (dq[dq.last])
+#define dq_get_first(dq) (dq.data[dq.first])
+#define dq_get_last(dq) (dq.data[dq.last])
 
 #define dq_set_first(dq, var) { \
     dq.data[dq.first] = (var) \

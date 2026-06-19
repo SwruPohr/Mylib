@@ -5,8 +5,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#import <stdint.h>
-
 typedef struct {
     int *data;
     size_t capacity;
@@ -14,11 +12,10 @@ typedef struct {
     size_t last; /* 0 to capacity - 1 */
 } Queue;
 
-#define q_size(dq) (dq.first == dq.capacity ? 0 : dq.first <= dq.last ? dq.last - dq.first + 1 : dq.capacity - dq.first + dq.last + 1)
+#define dq_size(dq) (dq.first == dq.capacity ? 0 : dq.first <= dq.last ? dq.last - dq.first + 1 : dq.capacity - dq.first + dq.last + 1)
 
-#define q_is_empty(dq) (dq.first == dq.capacity)
-#define q_is_full(dq) ((dq.first == 0 && dq.last == dq.capacity - 1) || dq.first == dq.last + 1)
-
+#define dq_is_empty(dq) (dq.first == dq.capacity)
+#define dq_is_full(dq) ((dq.first == 0 && dq.last == dq.capacity - 1) || dq.first == dq.last + 1)
 
 // APPRENSION
 
@@ -36,15 +33,14 @@ typedef struct {
 #define dq_push_back(dq, v) dq_append(dq, v)
 
 
-
 #define dq_contract_front(dq) \
-    if (dq.first == dq.last) {dq.first == dq.capacity;} \
-    else {dq.last = (dq.last == 0 ? dq.capacity : dq.last - 1);}
+if (dq.first == dq.last) {return 1;} \
+else {dq.first = (dq.first == dq.capacity - 1 ? 0 : dq.first - 1);}
 
 #define dq_pop_front(dq) { \
-    dq.data[dq.first]= 0; \
-    dq_contract_front(dq) \
-    }
+dq.data[dq.first]= 0; \
+dq_contract_front(dq) \
+}
 
 // GET SET
 
@@ -57,7 +53,7 @@ typedef struct {
     dq.data[(dq.first + i) % dq.capacity] = (var); \
     }
 
-#define dq_get_first(dq) (dq[dq.first])
+#define dq_get_first(dq) (dq.data[dq.first])
 
 
 #define dq_set_last(dq, var) { \
