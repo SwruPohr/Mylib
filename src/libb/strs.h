@@ -1,10 +1,4 @@
-//
-// Created by Swarup on 2026-05-29.
-//
-
-#ifndef STRS_H
-#define STRS_H
-
+#pragma once
 
 #include <stdint.h>
 #include <stdio.h>
@@ -253,4 +247,3 @@ static inline int example() {
     free(str);
     return 0;
 }
-#endif //STRS_H

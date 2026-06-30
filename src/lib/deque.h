@@ -1,9 +1,4 @@
-//
-// Created by Webcloud on 2026-05-06.
-//
-
-#ifndef DEQUE_H
-#define DEQUE_H
+#pragma once
 
 #import <stdint.h>
 
@@ -216,5 +211,3 @@ typedef struct {
     if (dq_is_full(dq)) {dq_realloc_unsafe(dq, dq.capacity * 2);} \
     dq_##fn(dq, ##__VA_ARGS__); \
     }
-
-#endif //DEQUE_H
