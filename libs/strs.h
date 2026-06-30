@@ -6,6 +6,7 @@
 #define STRS_H
 
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -93,10 +94,12 @@ static inline int get_until_delim (char **st, size_t *len, size_t *cap, char del
     return 2;
 }
 
-static inline int int_from_string(char *str, int *n) {
+
+#define INT_FROM_STRING_T int32_t
+static inline int int_from_string(char *str, INT_FROM_STRING_T *n) {
     char *p = str;
     int sign = 1;
-    int num = 0;
+    INT_FROM_STRING_T num = 0;
     int found = 0;
 
     // whitespace
@@ -119,6 +122,29 @@ static inline int int_from_string(char *str, int *n) {
 
     // set value
     if (found) *n = num * sign;
+
+    // return found
+    return !found;
+}
+
+#define UINT_FROM_STRING_T uint32_t
+static inline int uint_from_string(char *str, UINT_FROM_STRING_T *n) {
+    char *p = str;
+    UINT_FROM_STRING_T num = 0;
+    int found = 0;
+
+    // whitespace
+    while (isWhitespace(*p)) p++;
+
+    // digits
+    while (*p >= '0' && *p <= '9') {
+        num = (num * 10) + (*p - '0');
+        p++;
+        found = 1;
+    }
+
+    // set value
+    if (found) *n = num;
 
     // return found
     return !found;

@@ -61,7 +61,7 @@ typedef struct {
 
 #define dq_contract_front(dq) \
     if (dq.first == dq.last) {return 1;} \
-    else {dq.first = (dq.first == dq.capacity - 1 ? 0 : dq.first - 1);}
+    else {dq.first = (dq.first == dq.capacity - 1 ? 0 : dq.first + 1);}
 
 #define dq_pop_front(dq) { \
     dq.data[dq.first]= 0; \
